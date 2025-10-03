@@ -1,0 +1,195 @@
+.contactFeedback {
+  max-width: 810px;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, #f8fafc 60%, #eef2ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.08);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.headerIcon {
+  font-size: 2rem;
+  color: #7c3aed;
+}
+.headerTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #7c3aed;
+}
+.cardSection {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px #7c3aed22;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.3rem;
+}
+.cardIcon {
+  font-size: 1.5rem;
+  color: #7c3aed;
+}
+.cardSubtitle {
+  font-size: 1rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+.contactBtn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed33;
+  transition: background 0.2s;
+  margin-bottom: 0.5rem;
+}
+.contactBtn:hover {
+  background: #5b21b6;
+}
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+.contactForm input,
+.contactForm textarea {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0e7ff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.contactForm input:focus,
+.contactForm textarea:focus {
+  border: 1.5px solid #7c3aed;
+}
+.contactForm textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+textarea {
+  padding: 1.6rem;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.sendBtn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed33;
+  transition: background 0.2s;
+}
+.sendBtn:hover {
+  background: #5b21b6;
+}
+.cancelBtn {
+  background: #e0e7ff;
+  color: #7c3aed;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed22;
+  transition: background 0.2s;
+}
+.cancelBtn:hover {
+  background: #c7d2fe;
+}
+.successMsg {
+  color: #22c55e;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+.feedbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.starsRow {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+.star {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.footerSection {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+.socialsRow {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.socialIcon {
+  font-size: 1.7rem;
+  color: #7c3aed;
+  transition: color 0.2s;
+}
+.socialIcon:hover {
+  color: #5b21b6;
+}
+.footerText {
+  font-size: 1rem;
+  color: #64748b;
+}
+@media (max-width: 600px) {
+  .contactFeedback {
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+  }
+  .headerTitle {
+    font-size: 1.1rem;
+  }
+  .cardSection {
+    padding: 1rem 0.7rem;
+  }
+  .formActions {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .sendBtn,
+  .cancelBtn {
+    width: 100%;
+    padding: 0.7rem 0;
+  }
+}

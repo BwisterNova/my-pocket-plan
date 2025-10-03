@@ -1,0 +1,65 @@
+.mainHeader {
+  margin-top: 1rem;
+  padding: 2rem;
+  color: #fff;
+  transition: margin-left 0.4s;
+}
+
+/* .topBar {
+  background: #7c3aed;
+  width: 100%;
+  padding: 25px;
+  border: 3px solid #5b21b6;
+  border-radius: 50px;
+} */
+
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.6rem;
+  animation: caret 1s step-end infinite;
+}
+
+@keyframes caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.date {
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  color: #b8b8b8;
+}
+
+.expandedMargin {
+  margin-left: 250px; /* Sidebar expanded width */
+}
+
+.collapsedMargin {
+  margin-left: 85px; /* Sidebar collapsed width */
+}
+
+@media (max-width: 768px) {
+  .mainHeader {
+    margin-top: 3rem;
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .expandedMargin,
+  .collapsedMargin {
+    margin-top: 3rem;
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  /* .expandedMargin {
+    margin-left: 250px; /* Sidebar expanded width 
+  }
+
+  .collapsedMargin {
+    margin-left: 85px; /* Sidebar collapsed width
+  } */
+}

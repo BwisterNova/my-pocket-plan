@@ -1,0 +1,171 @@
+.profileSettings {
+  padding: 2.5rem 1.5rem;
+  color: #fff;
+  background: linear-gradient(135deg, #1f1136 60%, #a068e4 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Section */
+.section {
+  margin-bottom: 2.2rem;
+  width: 100%;
+  max-width: 480px;
+}
+.sectionTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #a068e4;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+/* Profile Card */
+
+.profileCard {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #2c1a4b 60%, #a068e4 100%);
+  padding: 1.2rem 1.5rem;
+  border-radius: 1.2rem;
+  justify-content: space-between;
+  box-shadow: 0 6px 24px rgba(160, 104, 228, 0.18);
+  margin-bottom: 1.2rem;
+}
+.avatar {
+  background: #a068e4;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.1rem;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(160, 104, 228, 0.18);
+}
+.userInfo {
+  flex: 1;
+  margin-left: 1.2rem;
+}
+.name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.email {
+  font-size: 0.95rem;
+  color: #b8b8b8;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.googleIcon {
+  color: #db4437;
+  font-size: 1.1rem;
+}
+
+/* Buttons */
+
+.editBtn {
+  background: #a068e4;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(160, 104, 228, 0.08);
+  transition: background 0.2s;
+}
+.editBtn:hover {
+  background: #8b54d4;
+}
+.disabledBtn {
+  background: #444;
+  color: #aaa;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: not-allowed;
+  font-size: 0.95rem;
+}
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.7rem;
+}
+.logoutBtn {
+  background: #a068e4;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(160, 104, 228, 0.08);
+  transition: background 0.2s;
+}
+.logoutBtn:hover {
+  background: #8b54d4;
+}
+.deleteBtn {
+  background: #db4437;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(219, 68, 55, 0.08);
+  transition: background 0.2s;
+}
+.deleteBtn:hover {
+  background: #b23328;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .profileSettings {
+    padding: 1.2rem 0.5rem;
+  }
+  .section {
+    max-width: 100%;
+    padding: 0;
+  }
+  .profileCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0.7rem;
+    border-radius: 1rem;
+  }
+  .avatar {
+    height: 54px;
+    width: 54px;
+    font-size: 1.5rem;
+  }
+  .userInfo {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+  .actions {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.7rem;
+  }
+  .logoutBtn,
+  .deleteBtn {
+    width: 100%;
+    text-align: center;
+    font-size: 0.98rem;
+    padding: 0.5rem 0.7rem;
+  }
+}

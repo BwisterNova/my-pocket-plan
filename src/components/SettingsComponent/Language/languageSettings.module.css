@@ -1,0 +1,148 @@
+.languageSettings {
+  max-width: 817px;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, #f8fafc 60%, #eef2ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.08);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.headerTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #7c3aed;
+}
+.sticker {
+  font-size: 2rem;
+  background: #e0e7ff;
+  border-radius: 50%;
+  padding: 0.3rem 0.7rem;
+  box-shadow: 0 2px 8px #7c3aed22;
+}
+.description {
+  font-size: 1rem;
+  color: #64748b;
+  margin-bottom: 0.7rem;
+}
+.section {
+  margin-bottom: 0.5rem;
+}
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+  color: #7c3aed;
+}
+.dropdownList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.dropdownItem {
+  background: #fff;
+  border: 1px solid #e0e7ff;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1rem;
+  color: #232946;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+}
+.dropdownItem:hover {
+  background: #eef2ff;
+  border: 1.5px solid #7c3aed;
+}
+.selected {
+  background: #e0e7ff;
+  border: 1.5px solid #7c3aed;
+  color: #7c3aed;
+}
+.flag {
+  font-size: 1.3rem;
+  margin-right: 0.3rem;
+}
+.langName {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.previewCard {
+  background: #e0e7ff;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #232946;
+  box-shadow: 0 2px 8px #7c3aed22;
+}
+.previewText {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.saveBtn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed33;
+  transition: background 0.2s;
+}
+.saveBtn:hover {
+  background: #5b21b6;
+}
+.resetBtn {
+  background: #e0e7ff;
+  color: #7c3aed;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed22;
+  transition: background 0.2s;
+}
+.resetBtn:hover {
+  background: #c7d2fe;
+}
+@media (max-width: 600px) {
+  .languageSettings {
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+  }
+  .headerTitle {
+    font-size: 1.1rem;
+  }
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  .buttonRow {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .saveBtn,
+  .resetBtn {
+    width: 100%;
+    padding: 0.7rem 0;
+  }
+}

@@ -1,0 +1,370 @@
+.container {
+  background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #fff;
+  width: 100%;
+  margin: 2rem auto;
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form h2 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+label {
+  display: block;
+  margin-top: 0.8rem;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  margin-bottom: 0.5rem;
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea::placeholder {
+  color: #fff;
+}
+
+input::placeholder {
+  color: #fff;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.addBtn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid;
+  padding: 0.7rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  border-image-source: linear-gradient(45deg, #fff, #5b21b6);
+  border-image-slice: 1;
+  animation: animate-border 3s linear infinite;
+  clip-path: inset(0 0 0 0 round 10px);
+}
+
+@keyframes animate-border {
+  0% {
+    border-image-source: linear-gradient(45deg, #fff, #5b21b6);
+  }
+  50% {
+    border-image-source: linear-gradient(45deg, #5b21b6, #fff);
+  }
+  100% {
+    border-image-source: linear-gradient(45deg, #fff, #5b21b6);
+  }
+}
+
+.addBtn:hover {
+  background: #8b54d4;
+}
+
+.transactions {
+  margin-top: 2rem;
+}
+
+option {
+  background-color: #7c3aed;
+}
+
+.list {
+  margin-top: 2rem;
+}
+
+.txItem {
+  background: #2c1a4b;
+  padding: 0.8rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #b8b8b8;
+  margin-top: 0.3rem;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: 1px solid #a068e4;
+  padding: 0.3rem 0.8rem;
+  color: #a068e4;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background: #a068e4;
+  color: #fff;
+}
+
+.errorMsg {
+  background: #ffe6e6;
+  color: #d32f2f;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin: 0.3rem 0 0.7rem 0;
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.08);
+  animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.seeMoreBtn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+.seeMoreBtn:hover {
+  background: #8b54d4;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.iconOption input[type="file"] {
+  display: none;
+}
+.iconOption {
+  position: relative;
+}
+.iconOption img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 6px;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.typeRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.typeLabel {
+  font-weight: bold;
+  margin-right: 1rem;
+  min-width: 60px;
+}
+.radioGroup {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Transaction grid and card styles */
+.txGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.txCard {
+  background: rgba(124, 58, 237, 2);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  transition: box-shadow 0.3s;
+}
+.txCard:hover {
+  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.5);
+  border: 1px solid;
+}
+.txHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.txIcon {
+  font-size: 1.5rem;
+  margin-right: 0.3rem;
+}
+
+.txNumber {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.txName {
+  color: #fff;
+  font-weight: bold;
+}
+.txType {
+  background: #6125bf;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+.txDetails {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #b8b8b8;
+}
+.txAmount {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.txDate {
+  font-size: 0.95rem;
+}
+.note {
+  font-size: 0.95rem;
+  color: #b8b8b8;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+.deleteBtn {
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 0.3rem 0.8rem;
+  color: #fff;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: background 0.3s, color 0.3s;
+}
+.deleteBtn:hover {
+  background: #a068e4;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.6);
+}
+
+/* Modal overlay and icon grid */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modalContent {
+  background: rgba(124, 58, 237, 0.7);
+  padding: 2rem;
+  border-radius: 14px;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.18);
+  min-width: 320px;
+}
+
+.modalBtns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.modalButtons {
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 0.3rem 0.8rem;
+  color: #fff;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.modalButtons:hover {
+  background: #a068e4;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.6);
+}
+
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(32px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.iconOption {
+  padding: 0.3rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 0.2s, border 0.2s;
+}
+.iconOption:hover {
+  background: #2c1a4b;
+  border: 1px solid #a068e4;
+}
+.iconSelected {
+  padding: 0.3rem;
+  border-radius: 8px;
+  background: #a068e4;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+/* For the browser */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

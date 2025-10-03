@@ -1,0 +1,176 @@
+.dashboardCard {
+  background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%);
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  color: #fff;
+  width: 100%;
+  margin: auto;
+  margin-top: 2rem;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.rowTop {
+  display: flex;
+}
+
+.amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+  background: linear-gradient(90deg, #fff 60%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 12px #7c3aed33;
+}
+.infoCard {
+  flex: 1;
+  min-width: 200px;
+  height: 109px;
+  background: linear-gradient(135deg, #5b21b6 60%, #7c3aed 100%);
+  padding: 1.2rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 8px #7c3aed22;
+  color: #fff;
+  margin: 0 0.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+  text-align: center;
+  display: block;
+  align-items: center;
+  overflow: hidden;
+}
+.infoCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px #7c3aed44;
+}
+
+.infoCard h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.infoCard p {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 8px #7c3aed22;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.syncButton {
+  background: linear-gradient(90deg, #fff 60%, #e0e7ff 100%);
+  color: #7c3aed;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.6rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.6);
+}
+.syncButton:hover {
+  background: linear-gradient(90deg, #e0e7ff 60%, #fff 100%);
+  color: #5b21b6;
+}
+.progressBar {
+  background: #e0e7ff;
+  border-radius: 0.5rem;
+  height: 10px;
+  margin-top: 0.4rem;
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #5b21b6 100%);
+  border-radius: 0.5rem;
+  width: 0; /* Will make it start from 0*/
+  transition: width 0.5s ease-in-out;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .dashboardCard {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 2rem;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+  }
+
+  .syncButton {
+    font-size: 0.5rem;
+  }
+
+  .amount {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    padding: 0;
+  }
+
+  .infoCard {
+    margin-bottom: 0.1rem;
+    min-width: 145px;
+    text-align: left;
+  }
+
+  .infoCard h4 {
+    font-size: 0.66rem;
+  }
+  .infoCard p {
+    font-size: 0.7rem;
+  }
+
+  .rowTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .rowTop .infoCard {
+    min-width: 120px;
+    height: 70px;
+  }
+
+  .rowDown {
+    width: 100%;
+  }
+
+  .rowDown .infoCard {
+    height: 90px;
+  }
+
+  .progressBar {
+    height: 5px;
+  }
+}

@@ -1,0 +1,145 @@
+.themeSettings {
+  max-width: 688px;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, #f8fafc 60%, #eef2ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.08);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section {
+  margin-bottom: 0.5rem;
+}
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #7c3aed;
+}
+.radioGroup {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.radioLabel {
+  font-size: 1rem;
+  color: #232946;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.swatchGroup {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e0e7ff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.selected {
+  border: 2px solid #7c3aed;
+  box-shadow: 0 0 0 2px #7c3aed33;
+}
+.check {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  text-shadow: 0 1px 4px #232946;
+}
+.previewCard {
+  border-radius: 14px;
+  padding: 1.2rem;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+.previewHeader {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.previewBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.previewAccent {
+  width: 32px;
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.saveBtn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed33;
+  transition: background 0.2s;
+}
+.saveBtn:hover {
+  background: #5b21b6;
+}
+.resetBtn {
+  background: #e0e7ff;
+  color: #7c3aed;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed22;
+  transition: background 0.2s;
+}
+.resetBtn:hover {
+  background: #c7d2fe;
+}
+@media (max-width: 600px) {
+  .themeSettings {
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+  }
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  .buttonRow {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .saveBtn,
+  .resetBtn {
+    width: 100%;
+    padding: 0.7rem 0;
+  }
+}

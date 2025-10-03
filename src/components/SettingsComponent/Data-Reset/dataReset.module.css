@@ -1,0 +1,203 @@
+.dataReset {
+  max-width: 690px;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, #fff1f1 60%, #f8fafc 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(255, 77, 77, 0.08);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.headerTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ff4d4d;
+}
+.sticker {
+  font-size: 2rem;
+  background: #ffe4e4;
+  border-radius: 50%;
+  padding: 0.3rem 0.7rem;
+  box-shadow: 0 2px 8px #ff4d4d22;
+}
+.subtitle {
+  font-size: 1rem;
+  color: #ff4d4d;
+  margin-bottom: 0.7rem;
+  font-weight: 500;
+}
+.optionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.optionCard {
+  background: #fff;
+  border: 2px solid #ffe4e4;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  box-shadow: 0 2px 8px #ff4d4d22;
+  position: relative;
+}
+.nuclearCard {
+  border: 2px solid #ff4d4d;
+  background: #fff5f5;
+}
+.optionIcon {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+.optionTexts {
+  flex: 1;
+}
+.dangerBtn {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #ff4d4d33;
+  transition: background 0.2s;
+}
+.dangerBtn:hover {
+  background: #d90429;
+}
+.nuclearBtn {
+  background: #d90429;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #ff4d4d33;
+  transition: background 0.2s;
+}
+.nuclearBtn:hover {
+  background: #ff4d4d;
+}
+/* Modal styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.modalBox {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 350px;
+  width: 95vw;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(255, 77, 77, 0.18);
+  overflow-y: auto;
+  position: relative;
+  border: 2px solid #ff4d4d;
+}
+.modalTitle {
+  font-size: 1.2rem;
+  color: #ff4d4d;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+}
+.modalMessage {
+  font-size: 1rem;
+  color: #232946;
+  margin-bottom: 1.2rem;
+}
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+.confirmBtn {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #ff4d4d33;
+  transition: background 0.2s;
+}
+.cancelBtn {
+  background: #e0e7ff;
+  color: #232946;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #7c3aed22;
+  transition: background 0.2s;
+}
+.cancelBtn:hover {
+  background: #c7d2fe;
+}
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4d4d;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px #ff4d4d33;
+  z-index: 99999;
+  animation: fadeInUp 0.4s;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}
+@media (max-width: 600px) {
+  .dataReset {
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+  }
+  .headerTitle {
+    font-size: 1.1rem;
+  }
+  .optionCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 1rem 0.7rem;
+  }
+  .modalBox {
+    max-width: 98vw;
+    padding: 1rem;
+  }
+}
