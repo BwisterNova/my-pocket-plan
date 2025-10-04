@@ -1,6 +1,6 @@
 .dashboardCard {
-  background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%);
-  padding: 2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem 1rem;
   border-radius: 1rem;
   color: #fff;
   width: 100%;
@@ -13,6 +13,10 @@
 
 .rowTop {
   display: flex;
+}
+
+.rowDown {
+  max-width: 4rem;
 }
 
 .amount {
@@ -28,12 +32,11 @@
 }
 .infoCard {
   flex: 1;
-  min-width: 200px;
+  min-width: 290px;
   height: 109px;
-  background: linear-gradient(135deg, #5b21b6 60%, #7c3aed 100%);
   padding: 1.2rem;
   border-radius: 0.7rem;
-  box-shadow: 0 2px 8px #7c3aed22;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   color: #fff;
   margin: 0 0.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -42,6 +45,7 @@
   display: block;
   align-items: center;
   overflow: hidden;
+  line-height: 1.5;
 }
 .infoCard:hover {
   transform: translateY(-5px);
@@ -109,18 +113,46 @@
 
 .row {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+
   margin-top: 1.5rem;
   flex-wrap: wrap;
 }
 
+@media (max-width: 1024px) {
+  .row {
+    flex-wrap: nowrap;
+  }
+
+  .infoCard {
+    min-width: 270px;
+  }
+}
+@media (max-width: 912px) {
+  .infoCard {
+    min-width: 233px;
+  }
+}
+@media (max-width: 820px) {
+  .row {
+    flex-wrap: nowrap;
+  }
+
+  .infoCard {
+    min-width: 213px;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboardCard {
-    max-width: 500px;
     margin: auto;
     margin-top: 2rem;
+  }
+
+  .row {
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .card h3 {
@@ -143,6 +175,7 @@
     margin-bottom: 0.1rem;
     min-width: 145px;
     text-align: left;
+    height: 15%;
   }
 
   .infoCard h4 {
@@ -156,6 +189,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
   }
   .rowTop .infoCard {
     min-width: 120px;
@@ -163,11 +197,7 @@
   }
 
   .rowDown {
-    width: 100%;
-  }
-
-  .rowDown .infoCard {
-    height: 90px;
+    max-width: 100%;
   }
 
   .progressBar {

@@ -165,27 +165,52 @@ export default function TransactionForm() {
       <form className={styles.form} onSubmit={handleAddTransaction}>
         <h2>Add New Transaction</h2>
         {/* Amount */}
-        <label>Amount</label>
-        <input
-          type="number"
-          placeholder="Enter amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          required
-        />
-        {/* Attractive validation message for amount */}
-        {amountError && (
-          <div className={styles.errorMsg}>
-            <span role="img" aria-label="error">
-              ❗
-            </span>{" "}
-            {amountError}
-          </div>
-        )}
-        {/* Type */}
+        <div className={styles.flexOne}>
+          <span className={styles.flexItem}>
+            <label>Amount</label>
+            <input
+              type="number"
+              placeholder="Enter amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              required
+            />
+            {/* Attractive validation message for amount */}
+            {amountError && (
+              <div className={styles.errorMsg}>
+                <span role="img" aria-label="error">
+                  ❗
+                </span>{" "}
+                {amountError}
+              </div>
+            )}
+          </span>
+
+          <span className={styles.flexItem}>
+            {/* Date */}
+            <label>Date</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+            {/* Attractive validation message for date */}
+            {dateError && (
+              <div className={styles.errorMsg}>
+                <span role="img" aria-label="error">
+                  📅
+                </span>{" "}
+                {dateError}
+              </div>
+            )}
+          </span>
+        </div>
+
+        {/* Types */}
         <div className={styles.typeRow}>
           <span className={styles.typeLabel}>Type:</span>
-          <div className={styles.radioGroup}>
+          <span className={styles.radioGroup}>
             <label>
               <input
                 type="radio"
@@ -208,10 +233,9 @@ export default function TransactionForm() {
               />
               Expense
             </label>
-          </div>
+          </span>
         </div>
         {/* Category */}
-        <label>Category</label>
         <select
           value={category.name}
           onChange={(e) => {
@@ -232,23 +256,7 @@ export default function TransactionForm() {
           ))}
           <option value="addNew">➕ Add New Category</option>
         </select>
-        {/* Date */}
-        <label>Date</label>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
-        {/* Attractive validation message for date */}
-        {dateError && (
-          <div className={styles.errorMsg}>
-            <span role="img" aria-label="error">
-              📅
-            </span>{" "}
-            {dateError}
-          </div>
-        )}
+
         {/* Note */}
         <label>Note</label>
         <textarea

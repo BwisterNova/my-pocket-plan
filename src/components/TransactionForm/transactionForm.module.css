@@ -1,11 +1,23 @@
 .container {
-  background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%);
+  background: rgba(255, 255, 255, 0.1);
+  /* background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%); */
   padding: 1.5rem;
   border-radius: 12px;
   color: #fff;
   width: 100%;
   margin: 2rem auto;
   box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.flexOne {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.flexItem {
+  width: 100%;
 }
 
 .form h2 {
@@ -48,14 +60,19 @@ input::placeholder {
 .radioGroup {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
+.radioGroup label {
+  display: flex;
+  gap: 0.5rem;
+}
 .addBtn {
   background: transparent;
   color: #fff;
-  border: 2px solid;
-  padding: 0.7rem;
+  border: 3px solid;
+  padding: 0.5rem;
+  font-size: 0.8rem;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
@@ -68,7 +85,7 @@ input::placeholder {
 
 @keyframes animate-border {
   0% {
-    border-image-source: linear-gradient(45deg, #fff, #5b21b6);
+    border-image-source: linear-gradient(45deg, #fff, #5e4d78);
   }
   50% {
     border-image-source: linear-gradient(45deg, #5b21b6, #fff);
@@ -87,7 +104,7 @@ input::placeholder {
 }
 
 option {
-  background-color: #7c3aed;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .list {
@@ -189,11 +206,10 @@ option {
 .typeRow {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
 }
 .typeLabel {
   font-weight: bold;
-  margin-right: 1rem;
+
   min-width: 60px;
 }
 .radioGroup {
@@ -210,7 +226,6 @@ option {
   margin-top: 1rem;
 }
 .txCard {
-  background: rgba(124, 58, 237, 2);
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
   padding: 1.2rem 1rem;
@@ -304,7 +319,7 @@ option {
   z-index: 1000;
 }
 .modalContent {
-  background: rgba(124, 58, 237, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   padding: 2rem;
   border-radius: 14px;
   color: #fff;
@@ -367,4 +382,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+@media (max-width: 768px) {
+  .flexOne {
+    flex-direction: column;
+    gap: 0;
+  }
 }

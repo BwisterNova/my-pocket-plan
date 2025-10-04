@@ -47,8 +47,8 @@ export default function DashboardCard() {
             </div>
           </span>
 
-          <div className={styles.infoCard}>
-            <span className={styles.rowDown}>
+          <div className={`${styles.infoCard} ${styles.rowDown}`}>
+            <span>
               <h4>Active Saving Goal</h4>
               <p>
                 $ {saved.toLocaleString()} of $ {target.toLocaleString()}

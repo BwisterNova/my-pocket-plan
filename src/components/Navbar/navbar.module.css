@@ -13,7 +13,8 @@
   left: 0;
   bottom: 0;
   width: 250px;
-  background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%);
+  background: #23212d;
+  /* background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%); */
   transition: all 0.4s ease;
   z-index: 4;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
