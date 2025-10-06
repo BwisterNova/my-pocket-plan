@@ -52,17 +52,17 @@ function App() {
           openAiPanel={openAiPanel}
           scrollTo={handleScrollTo}
         />
-        <Home
-          isSidebarCollapsed={isSidebarCollapsed}
-          scrollToSection={scrollToSection}
-        />
+
         <Routes>
-          {/*} <Route
+          <Route
             path="/"
             element={
-           
+              <Home
+                isSidebarCollapsed={isSidebarCollapsed}
+                scrollToSection={scrollToSection}
+              />
             }
-          /> */}
+          />
           <Route
             path="/reports"
             element={<Reports isSidebarCollapsed={isSidebarCollapsed} />}
