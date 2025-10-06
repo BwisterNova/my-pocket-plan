@@ -17,6 +17,7 @@ import {
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TipsInsightsModal from "../Tips-Insights/TipsInsightsModal";
 
 export default function Navbar({
@@ -79,9 +80,9 @@ export default function Navbar({
         {/* sideBar Header */}
         <header className={styles.sidebarHeader}>
           {/*The logo */}
-          <a href="#" className={styles.headerLogo}>
+          <Link to="#" className={styles.headerLogo}>
             <img src={logo} alt="My Pocket Plan Logo" />
-          </a>
+          </Link>
           <button className={styles.sidebarToggler} onClick={toggleSidebar}>
             <BiLeftArrow className={styles.rotate} />
           </button>
@@ -109,9 +110,9 @@ export default function Navbar({
                 <span className={styles.navLabel}>Dashboard</span>
               </button>
               {isCollapsed && dashboardHover && (
-                <a href="/" className={styles.hoverMenu} tabIndex={0}>
+                <Link to="/" className={styles.hoverMenu} tabIndex={0}>
                   Dashboard
-                </a>
+                </Link>
               )}
             </li>
             {/* Transactions nav item with smooth scroll */}
@@ -131,9 +132,9 @@ export default function Navbar({
                 <span className={styles.navLabel}>Transactions</span>
               </button>
               {isCollapsed && transactionsHover && (
-                <a href="/" className={styles.hoverMenu} tabIndex={0}>
+                <Link to="/" className={styles.hoverMenu} tabIndex={0}>
                   Transactions
-                </a>
+                </Link>
               )}
             </li>
             {/* Goals nav item with smooth scroll */}
@@ -151,9 +152,9 @@ export default function Navbar({
                 <span className={styles.navLabel}>Goals</span>
               </button>
               {isCollapsed && goalsHover && (
-                <a href="/" className={styles.hoverMenu} tabIndex={0}>
+                <Link to="/" className={styles.hoverMenu} tabIndex={0}>
                   Goals
-                </a>
+                </Link>
               )}
             </li>
             {/* Reports nav item with hover menu for collapsed sidebar */}
@@ -163,8 +164,8 @@ export default function Navbar({
               onMouseLeave={() => setReportsHover(false)}
               style={{ position: "relative" }}
             >
-              <a
-                href="/reports"
+              <Link
+                to="/reports"
                 className={
                   isActive("/reports")
                     ? `${styles.navLink} ${styles.activeNav}`
@@ -173,11 +174,11 @@ export default function Navbar({
               >
                 <FaChartPie className={styles.ItemIcon} />
                 <span className={styles.navLabel}>Reports</span>
-              </a>
+              </Link>
               {isCollapsed && reportsHover && (
-                <a href="/reports" className={styles.hoverMenu} tabIndex={0}>
+                <Link to="/reports" className={styles.hoverMenu} tabIndex={0}>
                   Reports
-                </a>
+                </Link>
               )}
             </li>
 
@@ -196,9 +197,9 @@ export default function Navbar({
                 <span className={styles.navLabel}>Tips / Insights</span>
               </button>
               {isCollapsed && tipsHover && (
-                <a href="#" className={styles.hoverMenu} tabIndex={0}>
+                <Link to="#" className={styles.hoverMenu} tabIndex={0}>
                   Insights
-                </a>
+                </Link>
               )}
             </li>
 
@@ -219,9 +220,9 @@ export default function Navbar({
                 <FaRobot className={styles.ItemIcon} />
                 <span className={styles.navLabel}>AI Assistant</span>
                 {isCollapsed && aiHover && (
-                  <a href="#" className={styles.hoverMenu} tabIndex={0}>
+                  <Link to="#" className={styles.hoverMenu} tabIndex={0}>
                     AI Assistant
-                  </a>
+                  </Link>
                 )}
               </button>
             </li>
@@ -251,7 +252,7 @@ export default function Navbar({
                 </span>
               </button>
               {isCollapsed && themeHover && (
-                <a href="#" className={styles.hoverMenu} tabIndex={0}>
+                <Link className={styles.hoverMenu} tabIndex={0}>
                   {theme ? (
                     <>
                       <FaSun className={styles.themeIcon} />
@@ -263,7 +264,7 @@ export default function Navbar({
                       <span className={styles.navLabel}>Dark Mode</span>
                     </>
                   )}
-                </a>
+                </Link>
               )}
             </li>
 
@@ -274,8 +275,8 @@ export default function Navbar({
               onMouseLeave={() => setSettingsHover(false)}
               style={{ position: "relative" }}
             >
-              <a
-                href="/settings"
+              <Link
+                to="/settings"
                 className={
                   isActive("/settings")
                     ? `${styles.navLink} ${styles.activeNav}`
@@ -284,11 +285,11 @@ export default function Navbar({
               >
                 <CiSettings className={styles.ItemIcon} />
                 <span className={styles.navLabel}>Settings</span>
-              </a>
+              </Link>
               {isCollapsed && settingsHover && (
-                <a href="/settings" className={styles.hoverMenu} tabIndex={0}>
+                <Link to="/settings" className={styles.hoverMenu} tabIndex={0}>
                   Settings
-                </a>
+                </Link>
               )}
             </li>
           </ul>
