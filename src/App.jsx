@@ -45,13 +45,14 @@ function App() {
 
   return (
     <>
-      <Navbar
-        isCollapsed={isSidebarCollapsed}
-        toggleSidebar={toggleSidebar}
-        openAiPanel={openAiPanel}
-        scrollTo={handleScrollTo}
-      />
       <Router>
+        <Navbar
+          isCollapsed={isSidebarCollapsed}
+          toggleSidebar={toggleSidebar}
+          openAiPanel={openAiPanel}
+          scrollTo={handleScrollTo}
+        />
+
         <Routes>
           <Route
             path="/"
