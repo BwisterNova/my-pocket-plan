@@ -1,14 +1,25 @@
 .dashboardCard {
   background: rgba(255, 255, 255, 0.1);
-  padding: 2rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(124, 0, 255, 0.2);
+  /* box-shadow: 0 0 25px rgba(124, 58, 237, 0.2); */
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  padding: 1.3rem 1rem;
   border-radius: 1rem;
   color: #fff;
   width: 100%;
   margin: auto;
   margin-top: 2rem;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-  position: relative;
   overflow: hidden;
+}
+
+.dashboardCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(128, 0, 255, 0.4);
+  /* box-shadow: 0 0 30px rgba(124, 58, 237, 0.4); */
 }
 
 .rowTop {
@@ -82,42 +93,43 @@
 }
 
 .syncButton {
-  background: linear-gradient(90deg, #fff 60%, #e0e7ff 100%);
-  color: #7c3aed;
+  background: linear-gradient(90deg, #6a00ff 60%, #00c6ff 100%);
+  color: #fff;
   border: none;
   border-radius: 0.7rem;
-  padding: 0.6rem 1.3rem;
+  padding: 0.8rem 1.5rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s;
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.6);
+  box-shadow: 0 0px 15px rgba(106, 0, 255, 0.6);
+  transition: 0.3s ease;
 }
 .syncButton:hover {
-  background: linear-gradient(90deg, #e0e7ff 60%, #fff 100%);
-  color: #5b21b6;
+  box-shadow: 0 0px 25px rgba(0, 198, 255, 0.8);
+  transform: scale(1.05);
 }
 .progressBar {
-  background: #e0e7ff;
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 0.5rem;
   height: 10px;
   margin-top: 0.4rem;
   overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6 0%, #5b21b6 100%);
+  background: linear-gradient(90deg, #6a00ff 0%, #00c6ff 100%);
   border-radius: 0.5rem;
   width: 0; /* Will make it start from 0*/
   transition: width 0.5s ease-in-out;
+  box-shadow: 0 0px 15px rgba(106, 0, 255, 0.6);
 }
 
 .row {
   display: flex;
   justify-content: center;
   align-items: center;
-
   margin-top: 1.5rem;
-  flex-wrap: wrap;
 }
 
 @media (max-width: 1024px) {

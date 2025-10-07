@@ -90,7 +90,7 @@ export default function Settings({ isSidebarCollapsed }) {
             }}
             style={{ cursor: item.link ? "pointer" : "default" }}
           >
-            <div className={styles.icon} style={{ color: "#a068e4" }}>
+            <div className={styles.icon} style={{ color: "#fff" }}>
               {item.icon}
             </div>
             <div className={styles.texts}>

@@ -76,10 +76,12 @@
   width: 100%;
   padding: 0.6rem 1rem;
   border-radius: 8px;
-  border: 1px solid #e0e7ff;
+  border: 1px solid #5b21b6;
   font-size: 1rem;
   outline: none;
   transition: border 0.2s;
+  color: #000;
+  font-size: 1.2rem;
 }
 .contactForm input:focus,
 .contactForm textarea:focus {

@@ -13,7 +13,7 @@
   left: 0;
   bottom: 0;
   width: 250px;
-  background: #23212d;
+  background: rgba(255, 255, 255, 0.1);
   /* background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%); */
   transition: all 0.4s ease;
   z-index: 4;
@@ -216,6 +216,9 @@ button,
 } */
 
 @media (max-width: 768px) {
+  .sidebar {
+    background: #593393;
+  }
   .sidebarMenuButton {
     display: block;
     position: fixed;

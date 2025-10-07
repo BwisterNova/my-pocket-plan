@@ -17,7 +17,7 @@ export default function DashboardCard() {
   }, [saved, target]);
 
   return (
-    <div>
+    <>
       <div className={styles.dashboardCard}>
         {/* Current Balance */}
         <div className={styles.card}>
@@ -65,6 +65,6 @@ export default function DashboardCard() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -3,6 +3,18 @@
 }
 
 body {
-  background: #18181b;
+  background: radial-gradient(circle at 20% 20%, #1a0033, #050010);
   /* background: linear-gradient(135deg, #5b21b6 60%, #0d071d 100%); */
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
+  /* opacity: 0.15; */
+  pointer-events: none;
 }
