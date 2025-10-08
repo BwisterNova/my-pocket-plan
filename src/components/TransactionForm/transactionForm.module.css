@@ -32,7 +32,7 @@ label {
   font-weight: bold;
 }
 
-input,
+.container input,
 select,
 textarea {
   width: 100%;
@@ -45,15 +45,15 @@ textarea {
   outline: none;
 }
 
-textarea {
+.container textarea {
   resize: none;
 }
 
-textarea::placeholder {
+.container textarea::placeholder {
   color: #fff;
 }
 
-input::placeholder {
+.container input::placeholder {
   color: #fff;
 }
 

@@ -81,7 +81,6 @@
   outline: none;
   transition: border 0.2s;
   color: #000;
-  font-size: 1.2rem;
 }
 .contactForm input:focus,
 .contactForm textarea:focus {
@@ -92,8 +91,15 @@
   resize: vertical;
 }
 
-textarea {
+/* .container textarea {
   padding: 1.6rem;
+} */
+
+.feedbackForm textarea {
+  padding: 1rem;
+  background: none;
+  border: 1px solid #7c3aed;
+  color: #000;
 }
 
 .formActions {
