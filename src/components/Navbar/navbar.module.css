@@ -13,8 +13,9 @@
   left: 0;
   bottom: 0;
   width: 250px;
-  background: rgba(255, 255, 255, 0.1);
-  /* background: linear-gradient(135deg, #7c3aed 60%, #5b21b6 100%); */
+  /* Sidebar background set to card-bg for light mode */
+  /* Sidebar background set to dark glass for dark mode */
+  background: var(--card-bg);
   transition: all 0.4s ease;
   z-index: 4;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
@@ -98,6 +99,8 @@ nav.sidebarNav {
 }
 
 .sidebarNav .navItem .navLink {
+  /* Nav link text color set to main for visibility */
+  /* Nav link text color set to white for dark mode */
   color: #fff;
   text-decoration: none;
   display: flex;
@@ -135,14 +138,22 @@ button,
   position: absolute;
   bottom: 30px;
   width: 100%;
-  background: #1f1136;
+  /* Secondary nav background set to card-bg for light mode */
+  /* Secondary nav background set to dark glass for dark mode */
+  background: var(--card-bg);
 }
 
 /* Active link styles */
 .activeNav {
-  background: linear-gradient(135deg, #5b21b6 50%, #7c3aed 100%);
+  background: var(--accent-gradient);
   color: #fff !important;
-  box-shadow: 0 4px 12px #7c3aed33;
+  box-shadow: 0 4px 12px #22c55e33;
+  /* Hover styles for nav items */
+  .sidebarNav .navItem:hover > .navLink {
+    background: var(--accent-gradient);
+    color: #fff !important;
+    box-shadow: 0 2px 12px #22c55e33;
+  }
 }
 /* Hover menu styles */
 .hoverMenu {
@@ -150,7 +161,7 @@ button,
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(90deg, #7c3aed 60%, #5b21b6 100%);
+  background: var(--accent-gradient);
   color: #fff;
   padding: 6px 12px;
   border-radius: 8px;
@@ -165,7 +176,7 @@ button,
 }
 
 .hoverMenu:hover {
-  background: linear-gradient(90deg, #7c3aed 60%, #5b21b6 100%);
+  background: var(--accent-gradient);
   color: #fff;
 }
 
@@ -217,7 +228,7 @@ button,
 
 @media (max-width: 768px) {
   .sidebar {
-    background: #593393;
+    background: #181824;
   }
   .sidebarMenuButton {
     display: block;

@@ -1,7 +1,8 @@
 .mainHeader {
   margin-top: 0rem;
   padding: 2rem;
-  color: #fff;
+  /* Main header color set to accent for visibility in dark mode */
+  color: var(--accent);
   transition: margin-left 0.4s;
 }
 
@@ -19,6 +20,7 @@
   white-space: nowrap;
   font-size: 1.2rem;
   animation: caret 1s step-end infinite;
+  border-right: 2px solid var(--accent);
 }
 
 @keyframes caret {
@@ -30,7 +32,8 @@
 .date {
   font-size: 1rem;
   margin-top: 0.3rem;
-  color: #b8b8b8;
+  /* Date color set to muted for dark mode */
+  color: var(--text-muted);
 }
 
 .expandedMargin {

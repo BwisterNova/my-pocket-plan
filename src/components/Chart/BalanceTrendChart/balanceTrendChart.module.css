@@ -1,8 +1,13 @@
 .wrapper {
-  width: 75%;
+  width: 80%;
   height: 200px;
   color: #fff;
   display: block;
-  margin: 0 auto;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
 }

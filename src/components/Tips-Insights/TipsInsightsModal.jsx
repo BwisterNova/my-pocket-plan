@@ -3,10 +3,16 @@ import styles from "./tipsInsightsModal.module.css";
 
 export default function TipsInsightsModal({ isOpen, onClose }) {
   if (!isOpen) return null;
+  // Prevent background scroll when modal is open
+  document.body.style.overflow = "hidden";
+  const handleClose = () => {
+    document.body.style.overflow = "";
+    onClose();
+  };
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <button className={styles.closeBtn} onClick={onClose}>
+        <button className={styles.closeBtn} onClick={handleClose}>
           &times;
         </button>
         <h2 className={styles.title}>Tips & Insights</h2>

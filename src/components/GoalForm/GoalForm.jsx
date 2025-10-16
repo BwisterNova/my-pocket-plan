@@ -1,6 +1,6 @@
 import { FiDelete } from "react-icons/fi";
 import styles from "./goalForm.module.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // Default goal icons
 const defaultGoalIcons = [
@@ -171,6 +171,18 @@ export default function GoalForm() {
       day: "numeric",
     });
   }
+
+  // Prevent background scroll when any modal is open
+  useEffect(() => {
+    if (showModal || showSavingsModal || showCompletedPopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showModal, showSavingsModal, showCompletedPopup]);
 
   return (
     <div className={styles.goalContainer}>
@@ -441,9 +453,7 @@ export default function GoalForm() {
               ✖
             </button>
             <h3>Notice</h3>
-            <div
-              style={{ margin: "1rem 0", color: "#a068e4", fontWeight: "bold" }}
-            >
+            <div style={{ margin: "1rem 0", fontWeight: "bold" }}>
               {infoMessage}
             </div>
             <button

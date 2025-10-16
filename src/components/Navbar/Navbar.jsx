@@ -15,11 +15,12 @@ import {
   FaBullseye,
 } from "react-icons/fa6";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import TipsInsightsModal from "../Tips-Insights/TipsInsightsModal";
 
+// --- HASH SECTION TRACKING LOGIC START ---
 export default function Navbar({
   isCollapsed,
   toggleSidebar,
@@ -43,16 +44,66 @@ export default function Navbar({
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Track mobile sidebar open state
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  // Prevent background scroll when mobile sidebar is open
+  useEffect(() => {
+    if (window.innerWidth <= 768 && !isCollapsed) {
+      document.body.style.overflow = "hidden";
+      setIsMobileSidebarOpen(true);
+    } else {
+      document.body.style.overflow = "";
+      setIsMobileSidebarOpen(false);
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isCollapsed]);
+
+  // Track active section from hash
+  const [activeSection, setActiveSection] = useState("dashboard");
+
+  // Listen for hash changes
+  useEffect(() => {
+    function onHashChange() {
+      const hash = window.location.hash.replace("#", "");
+      if (["dashboard", "transaction", "goal"].includes(hash)) {
+        setActiveSection(hash);
+      } else {
+        setActiveSection("dashboard");
+      }
+    }
+    window.addEventListener("hashchange", onHashChange);
+    onHashChange(); // Initial check
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
   // Helper to handle Home section navigation from anywhere
   function handleHomeSection(section) {
+    // --- update hash for section navigation ---
+    window.location.hash = section;
     if (location.pathname !== "/") {
       navigate("/");
-      // Delay scroll until after navigation
-      setTimeout(() => {
-        if (scrollTo) scrollTo(section);
-      }, 100);
+      // --- Wait for Home to mount, then scroll and close sidebar ---
+      const checkReadyAndScroll = () => {
+        // Wait until the Home refs are available
+        if (scrollTo && scrollTo.current && scrollTo.current[section]) {
+          scrollTo.current[section]();
+          if (window.innerWidth <= 768 && !isCollapsed) {
+            toggleSidebar();
+          }
+        } else {
+          // Try again on next frame
+          setTimeout(checkReadyAndScroll, 30);
+        }
+      };
+      checkReadyAndScroll();
     } else {
       if (scrollTo) scrollTo(section);
+      if (window.innerWidth <= 768 && !isCollapsed) {
+        toggleSidebar();
+      }
     }
   }
 
@@ -63,6 +114,14 @@ export default function Navbar({
     return false;
   }
 
+  // Auto-close sidebar on nav item click (mobile)
+  function handleNavClick(action) {
+    action();
+    if (window.innerWidth <= 768 && !isCollapsed) {
+      toggleSidebar();
+    }
+  }
+
   return (
     <div>
       {/* Mobile Sidebar Menu Button */}
@@ -71,7 +130,6 @@ export default function Navbar({
           <BiMenu className={styles.menuButton} />
         </button>
       </div>
-
       <aside
         className={`${styles.sidebar}${
           isCollapsed ? " " + styles.collapsed : ""
@@ -87,7 +145,6 @@ export default function Navbar({
             <BiLeftArrow className={styles.rotate} />
           </button>
         </header>
-
         <nav className={styles.sidebarNav}>
           {/* Primary top Nav */}
           <ul className={`${styles["navList"]} ${styles["primaryNav"]}`}>
@@ -100,11 +157,13 @@ export default function Navbar({
             >
               <button
                 className={
-                  isActive("/")
+                  location.pathname === "/" && activeSection === "dashboard"
                     ? `${styles.navLink} ${styles.activeNav}`
                     : styles.navLink
                 }
-                onClick={() => handleHomeSection("dashboard")}
+                onClick={() =>
+                  handleNavClick(() => handleHomeSection("dashboard"))
+                }
               >
                 <BiSolidDashboard className={styles.ItemIcon} />
                 <span className={styles.navLabel}>Dashboard</span>
@@ -124,9 +183,13 @@ export default function Navbar({
             >
               <button
                 className={
-                  isActive("/") ? `${styles.navLink} ` : styles.navLink
+                  location.pathname === "/" && activeSection === "transaction"
+                    ? `${styles.navLink} ${styles.activeNav}`
+                    : styles.navLink
                 }
-                onClick={() => handleHomeSection("transaction")}
+                onClick={() =>
+                  handleNavClick(() => handleHomeSection("transaction"))
+                }
               >
                 <FaMoneyBill1Wave className={styles.ItemIcon} />
                 <span className={styles.navLabel}>Transactions</span>
@@ -145,8 +208,12 @@ export default function Navbar({
               style={{ position: "relative" }}
             >
               <button
-                className={isActive("/") ? `${styles.navLink}` : styles.navLink}
-                onClick={() => handleHomeSection("goal")}
+                className={
+                  location.pathname === "/" && activeSection === "goal"
+                    ? `${styles.navLink} ${styles.activeNav}`
+                    : styles.navLink
+                }
+                onClick={() => handleNavClick(() => handleHomeSection("goal"))}
               >
                 <FaBullseye className={styles.ItemIcon} />
                 <span className={styles.navLabel}>Goals</span>
@@ -171,6 +238,7 @@ export default function Navbar({
                     ? `${styles.navLink} ${styles.activeNav}`
                     : styles.navLink
                 }
+                onClick={() => handleNavClick(() => navigate("/reports"))}
               >
                 <FaChartPie className={styles.ItemIcon} />
                 <span className={styles.navLabel}>Reports</span>
@@ -181,7 +249,6 @@ export default function Navbar({
                 </Link>
               )}
             </li>
-
             {/* Tips / Insights nav item with hover menu for collapsed sidebar */}
             <li
               className={styles.navItem}
@@ -191,7 +258,7 @@ export default function Navbar({
             >
               <button
                 className={styles.navLink}
-                onClick={() => setTipsOpen(true)}
+                onClick={() => handleNavClick(() => setTipsOpen(true))}
               >
                 <FaLightbulb />
                 <span className={styles.navLabel}>Tips / Insights</span>
@@ -202,7 +269,6 @@ export default function Navbar({
                 </Link>
               )}
             </li>
-
             {/* AI Assistant nav item */}
             <li
               className={styles.navItem}
@@ -214,7 +280,7 @@ export default function Navbar({
                 className={styles.navLink}
                 onClick={(e) => {
                   e.preventDefault();
-                  if (openAiPanel) openAiPanel();
+                  handleNavClick(() => openAiPanel && openAiPanel());
                 }}
               >
                 <FaRobot className={styles.ItemIcon} />
@@ -226,7 +292,6 @@ export default function Navbar({
                 )}
               </button>
             </li>
-
             {/* Theme nav item with hover menu for collapsed sidebar */}
             <li
               className={styles.navItem}
@@ -236,7 +301,7 @@ export default function Navbar({
             >
               <button
                 className={styles.navLink}
-                onClick={() => setTheme((prev) => !prev)}
+                onClick={() => handleNavClick(() => setTheme((prev) => !prev))}
               >
                 {/* Animated icon transition */}
                 <span className={styles.themeIconWrapper}>
@@ -267,7 +332,6 @@ export default function Navbar({
                 </Link>
               )}
             </li>
-
             {/* Settings nav item with hover menu for collapsed sidebar */}
             <li
               className={styles.navItem}
@@ -282,6 +346,7 @@ export default function Navbar({
                     ? `${styles.navLink} ${styles.activeNav}`
                     : styles.navLink
                 }
+                onClick={() => handleNavClick(() => navigate("/settings"))}
               >
                 <CiSettings className={styles.ItemIcon} />
                 <span className={styles.navLabel}>Settings</span>
@@ -293,11 +358,8 @@ export default function Navbar({
               )}
             </li>
           </ul>
-
           {/* Secondary bottom nav */}
-          <ul className={`${styles["navList"]} ${styles["secondaryNav"]}`}>
-            {/* Theme nav item with hover menu for collapsed sidebar */}
-          </ul>
+          <ul className={`${styles["navList"]} ${styles["secondaryNav"]}`}></ul>
         </nav>
       </aside>
       {/* Tips/Insights Modal */}
@@ -305,3 +367,4 @@ export default function Navbar({
     </div>
   );
 }
+// --- HASH SECTION TRACKING LOGIC END ---

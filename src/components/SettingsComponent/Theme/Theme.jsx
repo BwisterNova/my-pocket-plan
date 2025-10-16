@@ -3,9 +3,9 @@ import styles from "./theme.module.css";
 
 // Accent color swatches
 const accentColors = [
+  { name: "Green", value: "#22c55e" },
   { name: "Purple", value: "#7c3aed" },
   { name: "Blue", value: "#2563eb" },
-  { name: "Green", value: "#22c55e" },
   { name: "Pink", value: "#ec4899" },
   { name: "Orange", value: "#f97316" },
   { name: "Red", value: "#ef4444" },

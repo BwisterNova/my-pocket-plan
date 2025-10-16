@@ -1,5 +1,5 @@
 import styles from "./transactionForm.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //Default categories
 const defaultCategories = {
@@ -159,11 +159,22 @@ export default function TransactionForm() {
     );
   }
 
+  useEffect(() => {
+    if (showCategoryModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showCategoryModal]);
+
   return (
     <div className={styles.container}>
       {/* Add Transaction Form */}
       <form className={styles.form} onSubmit={handleAddTransaction}>
-        <h2>Add New Transaction</h2>
+        <h2>Add Transaction</h2>
         {/* Amount */}
         <div className={styles.flexOne}>
           <span className={styles.flexItem}>

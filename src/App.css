@@ -1,11 +1,27 @@
 * {
   margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Theme variables for dark mode and accent color */
+  --accent: #22c55e;
+  --accent-light: #16a34a33;
+  --accent-gradient: linear-gradient(135deg, #22c55e 60%, #16a34a 100%);
+  --card-bg: rgba(24, 24, 36, 0.7);
+  --card-border: transparent;
+  --text-main: #fff;
+  --text-muted: #b8b8b8;
+  --income-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  --expense-gradient: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  --goal-gradient: linear-gradient(135deg, #2563eb 0%, #6366f1 100%);
+  --balance-gradient: linear-gradient(135deg, #232946 60%, #181824 100%);
 }
 
 body {
-  background: radial-gradient(circle at 20% 20%, #1a0033, #050010);
-  /* background: linear-gradient(135deg, #5b21b6 60%, #0d071d 100%); */
-  color: #fff;
+  /* Body background and text color for dark mode */
+  background: #181824;
+  color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -15,6 +31,7 @@ body::before {
   position: fixed;
   inset: 0;
   background: url("https://www.transparenttextures.com/patterns/stardust.png");
-  /* opacity: 0.15; */
+  /* Stardust background for subtle glass effect in dark mode */
+  opacity: 0.12;
   pointer-events: none;
 }

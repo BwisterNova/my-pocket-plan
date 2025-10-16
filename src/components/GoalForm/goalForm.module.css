@@ -1,11 +1,12 @@
+/* Glass effect and accent color for box-shadow and border added by Copilot */
 .goalContainer {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
-  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  background: rgba(24, 24, 36, 0.7);
+  border: none;
   color: #fff;
   width: 100%;
   min-width: 320px;
-  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.2);
+  margin: 2rem auto;
 }
 
 .headerRow {
@@ -15,13 +16,13 @@
   margin-bottom: 1.2rem;
 }
 .header {
-  color: #fff;
+  color: var(--accent);
   margin: 0;
 }
 .addGoalBtn {
-  background: transparent;
+  background: var(--accent-gradient);
   color: #fff;
-  border: 3px solid;
+  border: none;
   padding: 0.5rem;
   font-size: 0.8rem;
   border-radius: 10px;
@@ -34,7 +35,7 @@
   clip-path: inset(0 0 0 0 round 10px);
 }
 .addGoalBtn:hover {
-  background: #8b54d4;
+  background: #16a34a;
 }
 
 @keyframes animate-border {
@@ -61,7 +62,7 @@
   margin-top: 0.7rem;
 }
 .savingsBtn {
-  background: linear-gradient(90deg, #8b5cf6 60%, #7c3aed 100%);
+  background: var(--accent-gradient);
   color: #fff;
   border: none;
   padding: 0.4rem 1rem;
@@ -70,11 +71,11 @@
   cursor: pointer;
   font-size: 1rem;
   transition: background 0.3s;
-  border: 1px solid #a068e4;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  border: none;
+  box-shadow: 0 2px 8px #22c55e33;
 }
 .savingsBtn:hover {
-  background: linear-gradient(90deg, #7c3aed 60%, #5b21b6 100%);
+  background: #16a34a;
 }
 .deleteGoalBtn {
   background: transparent;
@@ -116,7 +117,7 @@
   z-index: 2;
 }
 .closeModalBtn:hover {
-  color: #a068e4;
+  color: #16a34a;
 }
 .iconGrid {
   display: grid;
@@ -132,22 +133,22 @@
   transition: background 0.2s, border 0.2s;
 }
 .iconOption:hover {
-  background: #2c1a4b;
-  border: 1px solid #a068e4;
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
 }
 .iconSelected {
   padding: 0.3rem;
   border-radius: 8px;
-  background: #a068e4;
+  background: var(--accent);
   border: 1px solid #fff;
   color: #fff;
 }
 .completedModalContent {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(24, 24, 36, 0.9);
   padding: 2rem;
   border-radius: 14px;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.5);
+  box-shadow: 0 4px 16px #22c55e88;
   min-width: 320px;
   position: relative;
   text-align: center;
@@ -169,17 +170,17 @@
 }
 .goalCard {
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.1);
   padding: 1.2rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   position: relative;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, border 0.3s;
 }
 .goalCard:hover {
-  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.5);
-  border: 1px solid;
+  box-shadow: 0 4px 16px #22c55e88;
+  border: 2px solid var(--accent);
   cursor: pointer;
 }
 .goalHeader {
@@ -233,18 +234,20 @@
   margin-top: 0.5rem;
 }
 .progressBar {
-  background: #3a2462;
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 8px;
   height: 11px;
   width: 100%;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 2px 8px #22c55e22;
 }
 .progress {
-  background: linear-gradient(90deg, #3b82f6 0%, #5b21b6 100%);
+  background: var(--accent-gradient);
   height: 100%;
   border-radius: 8px;
   transition: width 0.4s;
+  box-shadow: 0 0px 15px #22c55e66;
 }
 .progressText {
   font-size: 0.95rem;
@@ -253,7 +256,7 @@
 }
 .completeBtn {
   background: transparent;
-  border: 1px solid #fff;
+  border: 1px solid var(--accent);
   padding: 0.3rem 0.8rem;
   color: #fff;
   border-radius: 8px;
@@ -262,7 +265,7 @@
   transition: background 0.3s, color 0.3s;
 }
 .completeBtn:hover {
-  background: #a068e4;
+  background: var(--accent-light);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 .emptyMsg {
@@ -284,11 +287,11 @@
   z-index: 1000;
 }
 .modalContent {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(24, 24, 36, 0.9);
   padding: 2rem;
   border-radius: 14px;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.18);
+  box-shadow: 0 4px 16px #22c55e44;
   min-width: 320px;
 }
 .goalForm label {
@@ -319,16 +322,18 @@
 }
 .modalButtons {
   background: transparent;
-  border: 1px solid #fff;
+  border: 1px solid var(--accent);
   padding: 0.3rem 0.8rem;
-  color: #fff;
+  color: var(--accent);
   border-radius: 8px;
   margin-top: 0.5rem;
   cursor: pointer;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
 }
 .modalButtons:hover {
-  background: #a068e4;
-  box-shadow: 0 4px 16px rgba(160, 104, 228, 0.6);
+  background: var(--accent-gradient);
+  color: #fff;
+  box-shadow: 0 4px 16px #22c55e88;
 }
 
 @media (max-width: 700px) {

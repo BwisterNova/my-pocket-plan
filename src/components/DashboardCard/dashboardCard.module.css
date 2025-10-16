@@ -1,10 +1,11 @@
+/* Progress bar uses accent color for background and box-shadow added by Copilot */
+/* Progress fill uses accent gradient and accent color for box-shadow added by Copilot */
+/* Glass effect and accent color for box-shadow and border added by Copilot */
 .dashboardCard {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  box-shadow: 0 0 25px rgba(124, 0, 255, 0.2);
-  /* box-shadow: 0 0 25px rgba(124, 58, 237, 0.2); */
-
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.07);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   padding: 1.3rem 1rem;
@@ -14,12 +15,6 @@
   margin: auto;
   margin-top: 2rem;
   overflow: hidden;
-}
-
-.dashboardCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 30px rgba(128, 0, 255, 0.4);
-  /* box-shadow: 0 0 30px rgba(124, 58, 237, 0.4); */
 }
 
 .rowTop {
@@ -47,7 +42,7 @@
   height: 109px;
   padding: 1.2rem;
   border-radius: 0.7rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 8px #22c55e22;
   color: #fff;
   margin: 0 0.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -58,6 +53,19 @@
   overflow: hidden;
   line-height: 1.5;
 }
+.incomeCard {
+  background: var(--income-gradient);
+  color: #fff;
+}
+.expenseCard {
+  background: var(--expense-gradient);
+  color: #fff;
+}
+.goalCard {
+  background: var(--goal-gradient);
+  color: #fff;
+}
+
 .infoCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px #7c3aed44;
@@ -118,11 +126,11 @@
 }
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #6a00ff 0%, #00c6ff 100%);
+  background: var(--accent-gradient);
   border-radius: 0.5rem;
   width: 0; /* Will make it start from 0*/
   transition: width 0.5s ease-in-out;
-  box-shadow: 0 0px 15px rgba(106, 0, 255, 0.6);
+  box-shadow: 0 0px 15px #22c55e66;
 }
 
 .row {
