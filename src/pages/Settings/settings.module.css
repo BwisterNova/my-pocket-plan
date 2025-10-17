@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(135deg, #1f1136, #2c1a4b);
+  background: #1a262a;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
   cursor: pointer;

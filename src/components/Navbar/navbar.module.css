@@ -7,6 +7,13 @@
   font-family: "Poppins", sans-serif;
 }
 
+.toggleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -73,6 +80,18 @@
 
 .sidebar.collapsed .sidebarToggler .rotate {
   transform: rotate(180deg);
+}
+
+.mobileIcons {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileIcons {
+    display: inline-flex;
+    margin-left: 8px;
+    align-items: center;
+  }
 }
 
 nav.sidebarNav {
@@ -230,6 +249,13 @@ button,
   .sidebar {
     background: #181824;
   }
+
+  .toggleContainer {
+    justify-self: flex-end;
+    margin-top: 1.2rem;
+    padding-right: 1rem;
+  }
+
   .sidebarMenuButton {
     display: block;
     position: fixed;

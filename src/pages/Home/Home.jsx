@@ -1,5 +1,6 @@
 import styles from "./home.module.css";
 import Typewriter from "typewriter-effect";
+import NotificationProfile from "../../components/NotificationProfile/NotificationProfile";
 import { useEffect, useState } from "react";
 
 // Components
@@ -63,21 +64,27 @@ export default function Home({ isSidebarCollapsed, scrollToSection }) {
         }`}
       >
         <div className={styles.topBar}></div>
-        <h1 className={styles.typewriter}>
-          <Typewriter
-            options={{
-              strings: [
-                "Welcome User 😊",
-                "Your personal finance assistant 🤖",
-                "Manage your pocket 💰",
-                "Stay in control 🔒",
-              ],
-              autoStart: true,
-              loop: true,
-              deleteSpeed: 100,
-            }}
-          />
-        </h1>
+        <div className={styles.headerRow}>
+          <h1 className={styles.typewriter}>
+            <Typewriter
+              options={{
+                strings: [
+                  "Welcome User 😊",
+                  "Your personal finance assistant 🤖",
+                  "Manage your pocket 💰",
+                  "Stay in control 🔒",
+                ],
+                autoStart: true,
+                loop: true,
+                deleteSpeed: 100,
+              }}
+            />
+          </h1>
+          {/* Icons on the right for desktop; hidden on mobile */}
+          <div style={{ marginLeft: "auto" }} className={styles.desktopIcons}>
+            <NotificationProfile />
+          </div>
+        </div>
         <p className={styles.date}>{today}</p>
         {/* Section for Dashboard and Forms */}
         <div>

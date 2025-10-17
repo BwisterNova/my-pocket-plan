@@ -6,6 +6,7 @@ import {
   BiMenu,
   BiSolidDashboard,
 } from "react-icons/bi";
+import NotificationProfile from "../NotificationProfile/NotificationProfile";
 import { CiSettings } from "react-icons/ci";
 import {
   FaMoneyBill1Wave,
@@ -129,6 +130,10 @@ export default function Navbar({
         <button className={styles.sidebarMenuButton} onClick={toggleSidebar}>
           <BiMenu className={styles.menuButton} />
         </button>
+        {/* Mobile icons (bell/profile) appear beside the menu button */}
+        <div className={styles.mobileIcons}>
+          <NotificationProfile className={styles.mobileOnly} />
+        </div>
       </div>
       <aside
         className={`${styles.sidebar}${

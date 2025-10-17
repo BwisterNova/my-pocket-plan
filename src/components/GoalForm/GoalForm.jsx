@@ -25,7 +25,7 @@ const defaultGoalIcons = [
 const initialGoals = [
   {
     id: 1,
-    name: "Buy a new laptop",
+    name: "New laptop",
     target: 1200,
     saved: 400,
     icon: "💻",
@@ -93,7 +93,7 @@ export default function GoalForm() {
     const goal = goals.find((g) => g.id === id);
     if (goal.saved < goal.target) {
       setInfoMessage(
-        "You must complete your savings goal before marking as completed."
+        "You must complete your savings goal before it's marked as completed."
       );
       setShowInfoPopup(true);
       return;
