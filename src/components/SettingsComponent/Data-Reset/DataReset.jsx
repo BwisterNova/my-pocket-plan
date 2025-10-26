@@ -1,5 +1,6 @@
 import styles from "./dataReset.module.css";
 import { useState } from "react";
+import { useAppContext } from "../../../context/AppContext";
 
 // Modal component
 function ConfirmModal({
@@ -45,22 +46,45 @@ export default function DataReset() {
   const [modal, setModal] = useState(null); // 'transactions', 'goals', 'all', or null
   // Toast state
   const [toast, setToast] = useState("");
+  // App context for transactions and reset helpers
+  const { transactions, editTransaction, removeTransaction, resetData } =
+    useAppContext();
+  const manualTopups = (transactions || []).filter((t) => t.manual === true);
 
   // Reset handlers
   function handleReset(type) {
-    // Clear localStorage or relevant data
+    // Clear relevant data via AppContext
     if (type === "transactions") {
-      // localStorage.removeItem("transactions");
+      resetData("transactions");
       setToast("Transactions have been reset successfully.");
     } else if (type === "goals") {
-      // localStorage.removeItem("goals");
+      resetData("goals");
       setToast("Goals have been reset successfully.");
     } else if (type === "all") {
-      // localStorage.clear();
+      resetData("all");
       setToast("All app data has been reset.");
     }
     setModal(null);
     setTimeout(() => setToast(""), 3000);
+  }
+
+  function handleEditManual(id, newAmount) {
+    const res = editTransaction(id, { amount: Number(newAmount) });
+    if (res.success) {
+      setToast("Manual top-up updated.");
+      setTimeout(() => setToast(""), 3000);
+    } else {
+      setToast("Failed to update.");
+      setTimeout(() => setToast(""), 3000);
+    }
+  }
+
+  function handleDeleteManual(id) {
+    const res = removeTransaction(id);
+    if (res.success) {
+      setToast("Manual top-up removed.");
+      setTimeout(() => setToast(""), 3000);
+    }
   }
 
   return (
@@ -119,6 +143,46 @@ export default function DataReset() {
             Nuclear Reset
           </button>
         </div>
+      </div>
+
+      {/* Manual top-ups editor */}
+      <div style={{ marginTop: 20 }}>
+        <h3>Manual top-ups</h3>
+        <p style={{ color: "#666", marginBottom: 12 }}>
+          These are amounts you added manually using the dashboard +Add. Edit or
+          remove them here — changing them will update your current balance
+          accordingly.
+        </p>
+        {manualTopups.length === 0 && (
+          <div className={styles.emptyMsg}>No manual top-ups found.</div>
+        )}
+        {manualTopups.map((tx) => (
+          <div key={tx.id} className={styles.manualRow}>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <div style={{ fontSize: 20 }}>{tx.category.icon}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600 }}>
+                  {tx.note || "Manual top-up"}
+                </div>
+                <div style={{ fontSize: 12, color: "#888" }}>{tx.date}</div>
+              </div>
+              <input
+                type="number"
+                defaultValue={tx.amount}
+                min={0}
+                onBlur={(e) => handleEditManual(tx.id, e.target.value)}
+                style={{ width: 120, padding: "6px 8px" }}
+              />
+              <button
+                className={styles.dangerBtn}
+                onClick={() => handleDeleteManual(tx.id)}
+                style={{ marginLeft: 8 }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Confirmation Modals */}

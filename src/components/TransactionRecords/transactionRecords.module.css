@@ -1,0 +1,381 @@
+/* Styles for TransactionRecords component */
+.records {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.25rem;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.typeSelect {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+}
+
+.monthPicker {
+  width: 180px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.monthList {
+  display: flex;
+  flex-direction: column;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.monthButton {
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.35rem 0.6rem;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.monthButton:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+}
+.monthButton.active {
+  background: linear-gradient(90deg, #22c55e22, #60a5fa22);
+  color: var(--text);
+}
+
+.listBox {
+  margin-top: 0.8rem;
+}
+
+/* new segmented control */
+.segmented {
+  display: flex;
+  gap: 6px;
+}
+.segBtn {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.segBtn:hover {
+  filter: brightness(1.05);
+}
+.activeSeg {
+  background: linear-gradient(90deg, #22c55e22, #60a5fa22);
+  color: var(--text);
+}
+
+/* picker wrapper */
+.pickerWrap {
+  position: relative;
+}
+.pickerBtn {
+  .pickerPopup {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    background: rgba(12, 12, 18, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.45rem;
+    border-radius: 10px;
+    z-index: 40;
+    width: 260px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  }
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+/* backdrop for picker, covers screen and allows click-outside to close */
+.pickerBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 30;
+}
+
+.colDelete {
+  width: 60px;
+  text-align: center;
+}
+.delIcon {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.16);
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.delIcon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.12);
+}
+.pickerPopup {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: rgba(12, 12, 18, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 0.6rem;
+  border-radius: 10px;
+  z-index: 40;
+  width: 320px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+.pickerColumns {
+  display: flex;
+  gap: 0.6rem;
+}
+.pickerColumn {
+  flex: 1;
+}
+.pickerLabel {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+}
+.pickerScroller {
+  max-height: 160px;
+  overflow-y: auto;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.01);
+  padding: 0.25rem;
+}
+.pickerItem {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.45rem 0.35rem;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.pickerItem:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+.pickerActive {
+  background: linear-gradient(90deg, #60a5fa22, #22c55e22);
+}
+.pickerActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.pickerConfirm {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.pickerCancel {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.colAction {
+  width: 80px;
+}
+.delBtn {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.16);
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Responsive: collapse grid to stacked rows on small screens */
+@media (max-width: 700px) {
+  .tableHeader,
+  .row {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+  }
+  .colDate {
+    grid-column: 1 / 2;
+  }
+  .colType {
+    grid-column: 2 / 3;
+    text-align: right;
+  }
+  .colCategory {
+    grid-column: 1 / 2;
+  }
+  .colAmount {
+    grid-column: 2 / 3;
+    text-align: right;
+  }
+  .colAction {
+    grid-column: 2 / 3;
+    text-align: right;
+  }
+  .tableHeader {
+    font-size: 0.85rem;
+  }
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 140px 90px 1fr 100px 60px;
+  gap: 6px;
+  padding: 0.35rem 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.tableBody {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 140px 90px 1fr 100px 60px;
+  gap: 6px;
+  align-items: center;
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.02);
+}
+
+.empty {
+  padding: 1rem;
+  color: var(--text-muted);
+}
+
+.typeBadge {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  text-transform: capitalize;
+}
+.typeIncome {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 197, 94, 0.1),
+    rgba(96, 165, 250, 0.06)
+  );
+  color: #16a34a;
+  border: 1px solid rgba(34, 197, 94, 0.12);
+}
+.typeExpense {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 68, 68, 0.08),
+    rgba(249, 115, 22, 0.03)
+  );
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.12);
+}
+
+/* Export button */
+.exportBtn {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 0.45rem;
+  border-radius: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.exportBtn:hover {
+  filter: brightness(1.04);
+}
+
+/* Undo toast */
+.undoToast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 28, 0.98),
+    rgba(16, 16, 22, 0.96)
+  );
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  z-index: 80;
+  min-width: 220px;
+}
+.undoToast span {
+  font-weight: 600;
+  opacity: 0.95;
+}
+.undoBtn {
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.undoBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12);
+}
+.undoProgress {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100px;
+}
+.undoBar {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #60a5fa);
+  width: 100%;
+  transform-origin: left center;
+  transition: width 300ms linear;
+}
+.catIcon {
+  margin-right: 0.5rem;
+}
+.colAmount {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.note {
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}

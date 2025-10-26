@@ -15,9 +15,11 @@ import styles from "./balanceTrendChart.module.css";
  * Balance trend line (plots current balance through time).
  * Uses a gradient stroke and subtle fill area.
  */
-export default function BalanceTrendChart() {
-  // dummy running balances (weekly)
-  const data = [
+export default function BalanceTrendChart({
+  data: dataProp,
+  accentColor = "#A068E4",
+}) {
+  const defaultData = [
     { period: "Jan", balance: 1200 },
     { period: "Feb", balance: 1800 },
     { period: "Mar", balance: 1500 },
@@ -25,6 +27,8 @@ export default function BalanceTrendChart() {
     { period: "May", balance: 2900 },
     { period: "Jun", balance: 3100 },
   ];
+
+  const data = dataProp && dataProp.length ? dataProp : defaultData;
 
   return (
     <div className={styles.wrapper}>
@@ -35,12 +39,12 @@ export default function BalanceTrendChart() {
         >
           <defs>
             <linearGradient id="lineGrad" x1="0" x2="1">
-              <stop offset="0%" stopColor="#A068E4" stopOpacity={1} />
-              <stop offset="100%" stopColor="#8B54D4" stopOpacity={1} />
+              <stop offset="0%" stopColor={accentColor} stopOpacity={1} />
+              <stop offset="100%" stopColor={accentColor} stopOpacity={0.8} />
             </linearGradient>
             <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="rgba(160,104,228,0.18)" />
-              <stop offset="100%" stopColor="rgba(160,104,228,0.02)" />
+              <stop offset="0%" stopColor={`${accentColor}33`} />
+              <stop offset="100%" stopColor={`${accentColor}05`} />
             </linearGradient>
           </defs>
 
@@ -52,8 +56,17 @@ export default function BalanceTrendChart() {
             axisLine={false}
           />
           <Tooltip
-            wrapperStyle={{ background: "#1F1136", border: "none" }}
-            contentStyle={{ color: "#000" }}
+            wrapperStyle={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: 8,
+              backdropFilter: "blur(6px)",
+            }}
+            contentStyle={{ color: "#fff" }}
+            formatter={(value) => [
+              `$${new Intl.NumberFormat().format(Number(value || 0))}`,
+              "Balance",
+            ]}
           />
           <Area
             type="monotone"

@@ -1,16 +1,16 @@
 import CountUp from "react-countup";
 import styles from "./dashboardCard.module.css";
 import { useEffect, useState, useRef } from "react";
+import { useAppContext } from "../../context/AppContext";
 
 // --- DashboardCard with manual balance update modal and tooltip ---
 export default function DashboardCard() {
-  // Savings Goal
-  const saved = 1200;
-  const target = 3000;
-  const [progress, setProgress] = useState(0);
+  // Use app context for persisted data
+  const { currentBalance, addManualBalance, totals, goalsSummary } =
+    useAppContext();
 
-  // Current balance state (editable)
-  const [currentBalance, setCurrentBalance] = useState(2562);
+  // Progress driven by aggregated goals
+  const [progress, setProgress] = useState(0);
   // Modal state
   const [showModal, setShowModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -20,11 +20,13 @@ export default function DashboardCard() {
 
   // Animate progress bar
   useEffect(() => {
+    const target = goalsSummary.totalTarget || 0;
+    const saved = goalsSummary.totalSaved || 0;
     const timeout = setTimeout(() => {
-      setProgress((saved / target) * 100);
+      setProgress(target > 0 ? (saved / target) * 100 : 0);
     }, 300);
     return () => clearTimeout(timeout);
-  }, [saved, target]);
+  }, [goalsSummary]);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -45,6 +47,15 @@ export default function DashboardCard() {
     }
   }, [showModal]);
 
+  // Listen for a global request to open the Dashboard add modal (from TransactionForm)
+  useEffect(() => {
+    function handleOpen() {
+      openModal();
+    }
+    window.addEventListener("openDashboardAdd", handleOpen);
+    return () => window.removeEventListener("openDashboardAdd", handleOpen);
+  }, []);
+
   // Handle modal open
   function openModal() {
     setInputValue("");
@@ -59,7 +70,7 @@ export default function DashboardCard() {
     e.preventDefault();
     const value = parseFloat(inputValue);
     if (!isNaN(value) && value > 0) {
-      setCurrentBalance((prev) => prev + value);
+      addManualBalance(value);
       setInputValue("");
       setShowModal(false);
     }
@@ -83,7 +94,7 @@ export default function DashboardCard() {
               ${" "}
               <CountUp
                 start={0}
-                end={currentBalance}
+                end={Number(currentBalance || 0)}
                 duration={1.2}
                 separator=","
               />
@@ -275,14 +286,26 @@ export default function DashboardCard() {
             <div className={`${styles.infoCard} ${styles.incomeCard}`}>
               <h4>Total Income</h4>
               <p>
-                $ <CountUp start={0} end={5000} duration={2} separator="," />
+                ${" "}
+                <CountUp
+                  start={0}
+                  end={totals.totalIncome || 0}
+                  duration={1.6}
+                  separator=","
+                />
               </p>
             </div>
             {/* Expense card uses orange/red gradient, text white, heading accent green in dark mode */}
             <div className={`${styles.infoCard} ${styles.expenseCard}`}>
               <h4>Total Expenses</h4>
               <p>
-                $ <CountUp start={0} end={2438} duration={2} separator="," />
+                ${" "}
+                <CountUp
+                  start={0}
+                  end={totals.totalExpenses || 0}
+                  duration={1.6}
+                  separator=","
+                />
               </p>
             </div>
           </span>
@@ -294,7 +317,8 @@ export default function DashboardCard() {
             <span>
               <h4>Active Saving Goal</h4>
               <p>
-                $ {saved.toLocaleString()} of $ {target.toLocaleString()}
+                $ {Number(goalsSummary.totalSaved || 0).toLocaleString()} of ${" "}
+                {Number(goalsSummary.totalTarget || 0).toLocaleString()}
               </p>
 
               {/* Progress bar uses accent gradient and accent color for box-shadow in dark mode */}

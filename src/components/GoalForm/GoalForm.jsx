@@ -1,6 +1,7 @@
 import { FiDelete } from "react-icons/fi";
 import styles from "./goalForm.module.css";
 import { useState, useRef, useEffect } from "react";
+import { useAppContext } from "../../context/AppContext";
 
 // Default goal icons
 const defaultGoalIcons = [
@@ -21,31 +22,11 @@ const defaultGoalIcons = [
   "🖼️",
 ];
 
-// Example goal data structure
-const initialGoals = [
-  {
-    id: 1,
-    name: "New laptop",
-    target: 1200,
-    saved: 400,
-    icon: "💻",
-    deadline: "2025-12-31",
-    completed: false,
-  },
-  {
-    id: 2,
-    name: "Vacation",
-    target: 2000,
-    saved: 800,
-    icon: "🏖️",
-    deadline: "2026-06-01",
-    completed: false,
-  },
-];
+// No embedded default goals here — the app uses goals from AppContext
 
 export default function GoalForm() {
-  // State for goals
-  const [goals, setGoals] = useState(initialGoals);
+  // Use goals from AppContext (persisted). Start empty unless the user adds goals.
+  const { goals = [], setGoals, addGoal, addToSavings } = useAppContext();
   // Modal state
   const [showModal, setShowModal] = useState(false);
   // New goal form state
@@ -72,7 +53,6 @@ export default function GoalForm() {
     e.preventDefault();
     if (!goalName || !goalTarget || !goalDeadline) return;
     const newGoal = {
-      id: Date.now(),
       name: goalName,
       target: Number(goalTarget),
       saved: 0,
@@ -80,7 +60,7 @@ export default function GoalForm() {
       deadline: goalDeadline,
       completed: false,
     };
-    setGoals([...goals, newGoal]);
+    addGoal(newGoal);
     setShowModal(false);
     setGoalName("");
     setGoalTarget("");
@@ -90,7 +70,8 @@ export default function GoalForm() {
 
   // Mark goal as completed (only if savings reached target)
   function handleCompleteGoal(id) {
-    const goal = goals.find((g) => g.id === id);
+    const goal = (goals || []).find((g) => g.id === id);
+    if (!goal) return;
     if (goal.saved < goal.target) {
       setInfoMessage(
         "You must complete your savings goal before it's marked as completed."
@@ -100,20 +81,24 @@ export default function GoalForm() {
     }
     setCompletedGoal(goal);
     setShowCompletedPopup(true);
-    setGoals(goals.map((g) => (g.id === id ? { ...g, completed: true } : g)));
+    setGoals((prev) =>
+      (prev || []).map((g) => (g.id === id ? { ...g, completed: true } : g))
+    );
   }
 
   // Reset completed goal
   function handleResetGoal(id) {
-    setGoals(
-      goals.map((g) => (g.id === id ? { ...g, completed: false, saved: 0 } : g))
+    setGoals((prev) =>
+      (prev || []).map((g) =>
+        g.id === id ? { ...g, completed: false, saved: 0 } : g
+      )
     );
     setShowCompletedPopup(false);
     setCompletedGoal(null);
   }
   // Delete goal
   function handleDeleteGoal(id) {
-    setGoals(goals.filter((g) => g.id !== id));
+    setGoals((prev) => (prev || []).filter((g) => g.id !== id));
   }
 
   // Add to savings (cannot exceed target)
@@ -121,32 +106,40 @@ export default function GoalForm() {
     e.preventDefault();
     if (!savingsAmount || isNaN(savingsAmount) || Number(savingsAmount) <= 0)
       return;
-    const goal = goals.find((g) => g.id === activeGoalId);
+    const goal = (goals || []).find((g) => g.id === activeGoalId);
+    if (!goal) return;
     const maxAdd = goal.target - goal.saved;
     if (Number(savingsAmount) > maxAdd) {
       setInfoMessage(`You cannot add more than $${maxAdd} to this goal.`);
       setShowInfoPopup(true);
       return;
     }
-    setGoals(
-      goals.map((g) =>
-        g.id === activeGoalId
-          ? {
-              ...g,
-              saved: g.saved + Number(savingsAmount),
-              completed:
-                g.saved + Number(savingsAmount) >= g.target
-                  ? true
-                  : g.completed,
-            }
-          : g
-      )
-    );
-    // If goal is completed after adding
-    if (goal && goal.saved + Number(savingsAmount) >= goal.target) {
-      setCompletedGoal({ ...goal, saved: goal.target });
+
+    const res = addToSavings(activeGoalId, Number(savingsAmount));
+    if (!res.success) {
+      if (res.message === "insufficient") {
+        setInfoMessage("Not enough balance to move this amount to your goal.");
+        setShowInfoPopup(true);
+      } else {
+        setInfoMessage(res.message || "Failed to add to savings.");
+        setShowInfoPopup(true);
+      }
+      return;
+    }
+
+    // If goal will be completed after adding
+    if (
+      goal &&
+      Number(goal.saved || 0) + Number(savingsAmount) >= Number(goal.target)
+    ) {
+      setCompletedGoal({
+        ...goal,
+        saved: Number(goal.target),
+        completed: true,
+      });
       setShowCompletedPopup(true);
     }
+
     setShowSavingsModal(false);
     setSavingsAmount("");
     setActiveGoalId(null);
@@ -209,9 +202,6 @@ export default function GoalForm() {
             <div className={styles.goalHeader}>
               <span className={styles.goalIcon}>{goal.icon}</span>
               <span className={styles.goalName}>{goal.name}</span>
-              {goal.completed && (
-                <span className={styles.completed}>✔️ Completed</span>
-              )}
               <button
                 className={styles.deleteGoalBtn}
                 title="Delete Goal"
@@ -256,12 +246,22 @@ export default function GoalForm() {
               </div>
             )}
             {goal.completed && (
-              <button
-                className={styles.resetBtn}
-                onClick={() => handleResetGoal(goal.id)}
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.6rem",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                }}
               >
-                Reset Goal
-              </button>
+                <span className={styles.completed}>✔️ Completed</span>
+                <button
+                  className={styles.resetBtn}
+                  onClick={() => handleResetGoal(goal.id)}
+                >
+                  Reset Goal
+                </button>
+              </div>
             )}
           </div>
         ))}

@@ -1,5 +1,6 @@
 import styles from "./transactionForm.module.css";
 import { useState, useEffect } from "react";
+import { useAppContext } from "../../context/AppContext";
 
 //Default categories
 const defaultCategories = {
@@ -46,13 +47,26 @@ export default function TransactionForm() {
   // The state for form inputs
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("income"); // 'income' or 'expense'
-  const [categories, setCategories] = useState(defaultCategories);
-  const [category, setCategory] = useState(defaultCategories[type][0]);
+  // categories now come from AppContext so they persist globally
+  const {
+    categories: ctxCategories,
+    addCategory,
+    addTransaction,
+    transactions,
+    removeTransaction,
+  } = useAppContext();
+  const [categories, setCategories] = useState(
+    ctxCategories || defaultCategories
+  );
+  const [category, setCategory] = useState(
+    (ctxCategories && ctxCategories[type] && ctxCategories[type][0]) ||
+      defaultCategories[type][0]
+  );
   const [date, setDate] = useState("");
   const [note, setNote] = useState("");
 
-  //Transaction List
-  const [transactions, setTransactions] = useState([]);
+  //Transaction List comes from AppContext (persisted)
+  // const [transactions, setTransactions] = useState([]);
 
   //For the modal popup
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -65,6 +79,8 @@ export default function TransactionForm() {
   // Validation state
   const [amountError, setAmountError] = useState("");
   const [dateError, setDateError] = useState("");
+  // Insufficient funds popup state
+  const [showInsufficient, setShowInsufficient] = useState(false);
   // See more/less state
   const [showAll, setShowAll] = useState(false);
 
@@ -88,32 +104,48 @@ export default function TransactionForm() {
     }
     if (!valid) return;
     const newTransaction = {
-      id: Date.now(),
       amount: parseFloat(amount),
       type,
       category,
       date,
       note,
     };
-    setTransactions([...transactions, newTransaction]);
+
+    const res = addTransaction(newTransaction);
+    if (!res.success) {
+      if (res.message === "insufficient") {
+        // show insufficient popup
+        setShowInsufficient(true);
+        return;
+      }
+      // other errors
+      return;
+    }
+
+    // success: clear form
     setAmount("");
     setNote("");
     setDate("");
-    setCategory(categories[type][0]);
+    setCategory(
+      (ctxCategories && ctxCategories[type] && ctxCategories[type][0]) ||
+        defaultCategories[type][0]
+    );
   }
 
   // Delete transaction
   const handleDelete = (id) => {
-    setTransactions(transactions.filter((tx) => tx.id !== id));
+    removeTransaction(id);
   };
 
   // Save new category
   function handleSaveCategory() {
     if (!newCategoryName.trim()) return;
     const newCat = { icon: newCategoryIcon, name: newCategoryName };
+    // persist the new category to AppContext
+    addCategory(type, newCat);
     setCategories((prev) => ({
-      ...prev,
-      [type]: [...prev[type], newCat],
+      ...(prev || {}),
+      [type]: [...((prev && prev[type]) || []), newCat],
     }));
     setCategory(newCat);
     setShowCategoryModal(false);
@@ -169,6 +201,11 @@ export default function TransactionForm() {
       document.body.style.overflow = "";
     };
   }, [showCategoryModal]);
+
+  // Keep local categories synced with context when it changes
+  useEffect(() => {
+    setCategories(ctxCategories || defaultCategories);
+  }, [ctxCategories]);
 
   return (
     <div className={styles.container}>
@@ -281,7 +318,7 @@ export default function TransactionForm() {
         </button>
       </form>
       {/* Transaction List */}
-      {transactions.length > 0 && (
+      {transactions && transactions.length > 0 && (
         <div className={styles.transactions}>
           <h3>Transactions</h3>
           {/* Show only first 3 transactions unless showAll is true */}
@@ -321,6 +358,44 @@ export default function TransactionForm() {
               </button>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Insufficient funds modal */}
+      {showInsufficient && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h3>Not enough balance</h3>
+            <p>
+              This expense would exceed your current balance. You can add funds
+              to your balance, adjust the transaction amount, or cancel.
+            </p>
+            <div className={styles.modalBtns}>
+              <button
+                className={styles.modalButtons}
+                onClick={() => {
+                  // Request Dashboard to open Add modal via AppContext signal
+                  // We use a global event so Dashboard can respond — set a custom event
+                  window.dispatchEvent(new CustomEvent("openDashboardAdd"));
+                  setShowInsufficient(false);
+                }}
+              >
+                Add funds
+              </button>
+              <button
+                className={styles.modalButtons}
+                onClick={() => setShowInsufficient(false)}
+              >
+                Adjust amount
+              </button>
+              <button
+                className={styles.modalButtons}
+                onClick={() => setShowInsufficient(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
       {/* Add Category Modal */}

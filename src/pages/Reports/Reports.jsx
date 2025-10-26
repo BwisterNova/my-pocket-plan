@@ -1,10 +1,13 @@
 import CountUp from "react-countup";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import TransactionRecords from "../../components/TransactionRecords/TransactionRecords";
 import styles from "./reports.module.css";
+import { useAppContext } from "../../context/AppContext";
 
 import IncomeExpensesChart from "../../components/Chart/IncomeExpensesChart/IncomeExpensesChart";
 import ExpensesBreakdownChart from "../../components/Chart/ExpensesBreakdownChart/ExpensesBreakdownChart";
 import BalanceTrendChart from "../../components/Chart/BalanceTrendChart/BalanceTrendChart";
+import TimeframeSelector from "../../components/TimeframeSelector/TimeframeSelector";
 
 /*
  * Reports page (UI-only)
@@ -13,12 +16,141 @@ import BalanceTrendChart from "../../components/Chart/BalanceTrendChart/BalanceT
  */
 export default function Reports({ isSidebarCollapsed }) {
   // --- Attractive Reports Page ---
-  const [filter, setFilter] = useState("This Month");
-  // Dummy summary numbers (replace with real context data later)
-  const totalIncome = 5000;
-  const totalExpenses = 3200;
+  const [filter, setFilter] = useState("Day");
+
+  const {
+    transactions = [],
+    totals = { totalIncome: 0, totalExpenses: 0 },
+    currentBalance = 0,
+    goalsSummary = {},
+  } = useAppContext();
+
+  const totalIncome = totals.totalIncome || 0;
+  const totalExpenses = totals.totalExpenses || 0;
   const netSavings = totalIncome - totalExpenses;
-  const currentBalance = 7000;
+
+  // Build buckets depending on the selected filter (Day / Week / Month)
+  const incomeExpensesData = useMemo(() => {
+    const now = new Date();
+
+    if (filter === "Day") {
+      // Current week: Monday -> Sunday
+      const startOfWeek = new Date(now);
+      const day = startOfWeek.getDay();
+      // getDay: 0 (Sun) .. 6 (Sat). We'll consider Monday as first day.
+      const diffToMon = (day + 6) % 7; // how many days since Monday
+      startOfWeek.setDate(now.getDate() - diffToMon);
+      const days = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(startOfWeek);
+        d.setDate(startOfWeek.getDate() + i);
+        const iso = d.toISOString().split("T")[0];
+        const label = d.toLocaleDateString("en-US", { weekday: "short" });
+        const income = (transactions || [])
+          .filter((t) => t.date === iso && t.type === "income")
+          .reduce((s, x) => s + Number(x.amount || 0), 0);
+        const expenses = (transactions || [])
+          .filter((t) => t.date === iso && t.type === "expense")
+          .reduce((s, x) => s + Number(x.amount || 0), 0);
+        days.push({ month: label, income, expenses });
+      }
+      return days;
+    }
+
+    if (filter === "Week") {
+      // Calendar weeks (Monday -> Sunday) covering the current month
+      const year = now.getFullYear();
+      const monthIndex = now.getMonth();
+      const firstOfMonth = new Date(year, monthIndex, 1);
+      const lastOfMonth = new Date(year, monthIndex + 1, 0);
+
+      // find the Monday on or before the 1st of the month
+      const startWeek = new Date(firstOfMonth);
+      const day = startWeek.getDay();
+      const diffToMon = (day + 6) % 7; // days since Monday
+      startWeek.setDate(firstOfMonth.getDate() - diffToMon);
+
+      const out = [];
+      let cursor = new Date(startWeek);
+      let weekIndex = 0;
+      while (cursor <= lastOfMonth) {
+        const weekStart = new Date(cursor);
+        const weekEnd = new Date(cursor);
+        weekEnd.setDate(weekStart.getDate() + 6);
+
+        const startIso = weekStart.toISOString().split("T")[0];
+        const endIso = weekEnd.toISOString().split("T")[0];
+
+        const income = (transactions || [])
+          .filter(
+            (t) => t.date >= startIso && t.date <= endIso && t.type === "income"
+          )
+          .reduce((s, x) => s + Number(x.amount || 0), 0);
+        const expenses = (transactions || [])
+          .filter(
+            (t) =>
+              t.date >= startIso && t.date <= endIso && t.type === "expense"
+          )
+          .reduce((s, x) => s + Number(x.amount || 0), 0);
+
+        const label = `Week of ${weekStart.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        })}`;
+        out.push({ month: label, income, expenses });
+
+        weekIndex++;
+        cursor.setDate(cursor.getDate() + 7);
+      }
+      return out;
+    }
+
+    // Default: Month (last 6 months)
+    const months = [];
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      months.push({
+        monthLabel: d.toLocaleString("en-US", { month: "short" }),
+        year: d.getFullYear(),
+        monthIndex: d.getMonth(),
+      });
+    }
+    return months.map((m) => {
+      const monthStr = `${m.year}-${String(m.monthIndex + 1).padStart(2, "0")}`;
+      const income = (transactions || [])
+        .filter(
+          (t) => t.date && t.date.startsWith(monthStr) && t.type === "income"
+        )
+        .reduce((s, x) => s + Number(x.amount || 0), 0);
+      const expenses = (transactions || [])
+        .filter(
+          (t) => t.date && t.date.startsWith(monthStr) && t.type === "expense"
+        )
+        .reduce((s, x) => s + Number(x.amount || 0), 0);
+      return { month: `${m.monthLabel} ${m.year}`, income, expenses };
+    });
+  }, [filter, transactions]);
+
+  // Balance trend: cumulative monthly balance (net per month)
+  const balanceTrendData = useMemo(() => {
+    let cumulative = 0;
+    return incomeExpensesData.map((row) => {
+      cumulative += (row.income || 0) - (row.expenses || 0);
+      return { period: row.month, balance: cumulative };
+    });
+  }, [incomeExpensesData]);
+
+  // Expenses breakdown by category
+  const expensesBreakdown = useMemo(() => {
+    const map = {};
+    (transactions || [])
+      .filter((t) => t.type === "expense")
+      .forEach((t) => {
+        const key = (t.category && t.category.name) || t.note || "Other";
+        map[key] = (map[key] || 0) + Number(t.amount || 0);
+      });
+    return Object.keys(map).map((k) => ({ name: k, value: map[k] }));
+  }, [transactions]);
 
   return (
     <div
@@ -47,6 +179,11 @@ export default function Reports({ isSidebarCollapsed }) {
             📊
           </span>
         </h1>
+        {/* Reusable timeframe selector (Day / Week / Month) */}
+        <div>
+          {/* TimeframeSelector component */}
+          <TimeframeSelector value={filter} onChange={setFilter} />
+        </div>
       </div>
 
       {/* Overview cards - glass effect, accent shadow */}
@@ -95,7 +232,7 @@ export default function Reports({ isSidebarCollapsed }) {
         >
           <div className={styles.cardHeader}>
             <span className={styles.cardIcon}>📈</span>
-            <span className={styles.cardTitle}>Net Savings</span>
+            <span className={styles.cardTitle}>Current Balance</span>
           </div>
           <div className={styles.cardValue}>
             <CountUp
@@ -124,7 +261,8 @@ export default function Reports({ isSidebarCollapsed }) {
           </div>
           {/* --- IncomeExpensesChart: bars wider, new colors --- */}
           <IncomeExpensesChart
-            barSize={32}
+            data={incomeExpensesData}
+            barSize={36}
             incomeColor="#22c55e"
             expenseColor="#ef4444"
           />
@@ -142,7 +280,10 @@ export default function Reports({ isSidebarCollapsed }) {
             <h3 style={{ color: "var(--accent)" }}>Expenses Breakdown</h3>
           </div>
           {/* --- ExpensesBreakdownChart: improved colors --- */}
-          <ExpensesBreakdownChart accentColor="#22c55e" />
+          <ExpensesBreakdownChart
+            data={expensesBreakdown}
+            colors={["#A068E4", "#8B54D4", "#FF4D94", "#4FD1C5", "#FFD166"]}
+          />
         </div>
       </div>
       <div
@@ -162,7 +303,11 @@ export default function Reports({ isSidebarCollapsed }) {
           <p style={{ color: "var(--text-muted)" }}>Current Balance</p>
         </div>
         {/* --- BalanceTrendChart: improved responsiveness --- */}
-        <BalanceTrendChart accentColor="#22c55e" />
+        <BalanceTrendChart data={balanceTrendData} accentColor="#22c55e" />
+      </div>
+      {/* Transaction Records UI (UI-only for now) */}
+      <div style={{ marginTop: "1rem" }}>
+        <TransactionRecords />
       </div>
     </div>
   );
